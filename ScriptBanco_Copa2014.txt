@@ -1,0 +1,194 @@
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+DROP SCHEMA IF EXISTS `teste` ;
+CREATE SCHEMA IF NOT EXISTS `teste` DEFAULT CHARACTER SET latin1 ;
+SHOW WARNINGS;
+USE `teste` ;
+
+-- -----------------------------------------------------
+-- Table `tipousuarios`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `tipousuarios` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `tipousuarios` (
+  `idtipoUsu` INT(11) NOT NULL ,
+  `NomeTipUsu` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`idtipoUsu`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `usuario`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `usuario` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `usuario` (
+  `idUsu` INT(11) NOT NULL AUTO_INCREMENT ,
+  `NomeUsu` VARCHAR(45) NULL DEFAULT NULL ,
+  `TipUsu` VARCHAR(45) NULL DEFAULT NULL ,
+  `LoginUsu` VARCHAR(20) NULL DEFAULT NULL ,
+  `SenhaUsu` VARCHAR(6) NULL DEFAULT NULL ,
+  PRIMARY KEY (`idUsu`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+SHOW WARNINGS;
+CREATE INDEX `tipo_usuario_idx` ON `usuario` (`idUsu` ASC) ;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `anuncio`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `anuncio` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `anuncio` (
+  `idAnun` INT(3) NOT NULL AUTO_INCREMENT ,
+  `TituloAnun` VARCHAR(40) NULL DEFAULT NULL ,
+  `Endereco` VARCHAR(90) NULL DEFAULT NULL ,
+  `Telefone` VARCHAR(15) NULL DEFAULT NULL ,
+  `SeguemAnun` VARCHAR(25) NULL DEFAULT NULL ,
+  `TextoAnun` VARCHAR(100) NULL DEFAULT NULL ,
+  `Anunciante` VARCHAR(20) NOT NULL ,
+  `DataAnunc` DATETIME NULL DEFAULT NULL ,
+  `StatusAnun` VARCHAR(20) NULL DEFAULT 'Pendente' ,
+  `usuario_idUsu` INT(11) NOT NULL ,
+  PRIMARY KEY (`idAnun`, `usuario_idUsu`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = latin1;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `jogo`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `jogo` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `jogo` (
+  `idJogo` INT(11) NOT NULL AUTO_INCREMENT ,
+  `DataJogo` DATETIME NULL DEFAULT NULL ,
+  `Time_um` VARCHAR(45) NOT NULL ,
+  `Time_dois` VARCHAR(45) NOT NULL ,
+  `Estadio` VARCHAR(45) NULL DEFAULT NULL ,
+  `Rodada_num` VARCHAR(5) NOT NULL ,
+  `Placar_um` INT(2) NULL DEFAULT NULL ,
+  `Placar_dois` INT(2) NULL DEFAULT NULL ,
+  PRIMARY KEY (`idJogo`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 28
+DEFAULT CHARACTER SET = latin1;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `bolao`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bolao` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `bolao` (
+  `idBolao` INT(11) NOT NULL AUTO_INCREMENT ,
+  `golsTimeUm` INT(2) NULL DEFAULT NULL ,
+  `golsTimeDois` INT(2) NULL DEFAULT NULL ,
+  `idJogo` INT(3) NULL DEFAULT NULL ,
+  `autorBolao` VARCHAR(45) NULL DEFAULT NULL ,
+  `Vencedor` VARCHAR(1) NULL DEFAULT NULL ,
+  `Pontuacao` INT(3) NULL DEFAULT NULL ,
+  `usuario_idUsu` INT(11) NOT NULL ,
+  PRIMARY KEY (`idBolao`, `usuario_idUsu`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 17
+DEFAULT CHARACTER SET = latin1;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `cidade_sede`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `cidade_sede` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `cidade_sede` (
+  `idCS` INT(11) NOT NULL AUTO_INCREMENT ,
+  `NomeCS` VARCHAR(45) NULL DEFAULT NULL ,
+  `EstadoCS` VARCHAR(2) NULL DEFAULT NULL ,
+  `InfoCS` VARCHAR(1000) NULL DEFAULT NULL ,
+  PRIMARY KEY (`idCS`) )
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = latin1;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `noticia`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `noticia` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `noticia` (
+  `idNoticias` INT(5) NOT NULL AUTO_INCREMENT ,
+  `descNot` VARCHAR(150) NULL DEFAULT NULL ,
+  `NotCompleta` VARCHAR(1200) NULL DEFAULT NULL ,
+  `TituloNot` VARCHAR(80) NULL DEFAULT NULL ,
+  `StatusNoticia` VARCHAR(35) NULL DEFAULT 'Pendente' ,
+  `DataNoticia` DATETIME NULL DEFAULT NULL ,
+  `Imagem` VARCHAR(100) NULL DEFAULT NULL ,
+  `NomeAutor` VARCHAR(45) NULL DEFAULT NULL ,
+  PRIMARY KEY (`idNoticias`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 6
+DEFAULT CHARACTER SET = latin1;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `comentario`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `comentario` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `comentario` (
+  `idComentario` INT(5) NOT NULL AUTO_INCREMENT ,
+  `textoComentario` VARCHAR(150) NULL DEFAULT NULL ,
+  `IdNoticia` INT(5) NOT NULL ,
+  `DataComentario` DATETIME NULL DEFAULT NULL ,
+  `AutorComentario` VARCHAR(45) NULL DEFAULT NULL ,
+  `StatusComentario` VARCHAR(25) NULL DEFAULT 'Pendente' ,
+  `usuario_idUsu` INT(11) NOT NULL ,
+  PRIMARY KEY (`idComentario`, `usuario_idUsu`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 50
+DEFAULT CHARACTER SET = latin1;
+
+SHOW WARNINGS;
+
+-- -----------------------------------------------------
+-- Table `selecao`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `selecao` ;
+
+SHOW WARNINGS;
+CREATE  TABLE IF NOT EXISTS `selecao` (
+  `idSelecao` INT(11) NOT NULL AUTO_INCREMENT ,
+  `NomeSelecao` VARCHAR(45) NULL DEFAULT NULL ,
+  `InfoSelecao` VARCHAR(3000) NULL DEFAULT NULL ,
+  PRIMARY KEY (`idSelecao`) )
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = latin1;
+
+SHOW WARNINGS;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
