@@ -1,0 +1,148 @@
+//Plano de teste I
+
+//1 Incremento:
+
+public void ApuraBolao()
+{
+  
+  Jogo J = new Jogo("Brasil", "Argentina", 3, 3); 
+  Bolao B = new Bolao(1, 5, 3);
+
+  if(J.placarUm==B.timeUm && J.placarDois==B.timeDois)
+	{
+		assertEquals(30, B.pontuação) 
+	}	
+
+}
+
+
+
+class Jogo 
+{
+	string timeUm, timeDois;
+	int placarUm, placarDois;
+
+   Jogo(timeUm, timeDois, placarUm, placarDois)
+	{
+		
+	}
+
+
+}
+
+
+
+class Bolao
+{
+     int idJogo, b_TimeUm, b_TimeDois, pontuacao;
+     Bolao(int IdJogo, int b_TimeUm, int b_timeDois)  
+	{
+	   
+	}
+
+     PontuaBolao(int pontuacao)
+	{
+		
+		this.pontuacao=pontuacao
+	}
+
+}
+
+// Segundo incremento:
+
+
+
+class Jogo 
+{
+	string TimeUm, TimeDois;
+	int PlacarUm, PlacarDois;
+
+   Jogo(timeUm, timeDois, placarUm, placarDois)
+	{
+		this.TimeUm = timeUm;
+		this.TimeDois=timeDois;
+		this.PlacarUm=placarUm;
+		this.PlacarDois=placarDois;
+		
+	}
+
+
+}
+
+
+
+class Bolao
+{
+     int IdJogo, b_TimeUm, b_TimeDois, pontuacao;
+     Bolao(int idJogo, int b_timeUm, int b_timeDois)  
+	{
+		this.idJogo=IdJogo;
+		this.b_TimeUm=b_timeUm;
+		this.b_TimeDois=b_timeDois;
+	   
+	}
+
+     PontuaBolao(int pontuacao)
+	{
+		this.pontuacao=pontuacao;
+	}
+
+}
+
+
+
+//Plano de teste II
+
+//1 Incremento:
+
+public void ApuraBolao()
+{
+  
+  Jogo J = new Jogo("França", "Itália", 3, 3); 
+  Bolao B = new Bolao(2, 3, 4);
+
+  if(J.placarUm==B.timeUm || J.placarDois==B.timeDois)
+	{
+		assertEquals(20, B.pontuação) 
+	}	
+
+}
+
+
+//O restante é aplicado com o primeiro caso de teste.
+
+
+
+
+//Plano de teste III
+
+//1 Incremento:
+
+public void ApuraBolao()
+{
+  
+  Jogo J = new Jogo("Alemanha", "Brasil", 4, 4); 
+  Bolao B = new Bolao(3, 2, 2);
+
+  if(J.placarUm!=B.timeUm && J.placarDois!=B.timeDois)
+	{
+		assertEquals(0, B.pontuação) 
+	}	
+
+}
+
+
+
+//O restante é aplicado com o primeiro caso de teste.
+
+
+
+
+
+
+
+
+entrada: placar
+	 aposta usuario
+ 
+Saida: pontuação 
